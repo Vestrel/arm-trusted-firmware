@@ -4,8 +4,9 @@
 # SPDX-License-Identifier: BSD-3-Clause
 #
 
+SOC			:=	rk3588
 RK_PLAT			:=	plat/rockchip
-RK_PLAT_SOC		:=	${RK_PLAT}/${PLAT}
+RK_PLAT_SOC		:=	${RK_PLAT}/${SOC}
 RK_PLAT_COMMON		:=	${RK_PLAT}/common
 
 DISABLE_BIN_GENERATION	:=	1
@@ -19,7 +20,7 @@ GICV3_SUPPORT_GIC600   	:=      1
 # Include GICv3 driver files
 include drivers/arm/gic/v3/gicv3.mk
 
-PLAT_INCLUDES		:=	-Iinclude/plat/common				\
+PLAT_INCLUDES		+=	-Iinclude/plat/common				\
 				-Idrivers/arm/gic/v3/				\
 				-Idrivers/scmi-msg/				\
 				-I${RK_PLAT_COMMON}/				\
@@ -73,6 +74,8 @@ BL31_SOURCES		+=	${RK_GIC_SOURCES}				\
 				${RK_PLAT_COMMON}/scmi/scmi_clock.c		\
 				${RK_PLAT_COMMON}/scmi/scmi_rstd.c		\
 				${RK_PLAT_SOC}/plat_sip_calls.c         	\
+				${RK_PLAT_SOC}/plat_sip_sdmmc.c         	\
+				${RK_PLAT_SOC}/rk3588_trng.c			\
 				${RK_PLAT_SOC}/drivers/secure/secure.c		\
 				${RK_PLAT_SOC}/drivers/soc/soc.c		\
 				${RK_PLAT_SOC}/drivers/pmu/pmu.c		\
@@ -95,4 +98,6 @@ USE_COHERENT_MEM	:=	0
 ENABLE_SPE_FOR_LOWER_ELS	:= 0
 
 PLAT_EXTRA_LD_SCRIPT	:=	1
+TRNG_SUPPORT		:=	1
+
 $(eval $(call add_define,PLAT_RK_CPU_RESET_EARLY))
