@@ -106,6 +106,10 @@
 #define DDRPHY2_BASE		0xfe0e0000
 #define DDRPHY3_BASE		0xfe0f0000
 #define TIMER_DDR_BASE		0xfe118000
+#define SDMMC_BASE		0xfe2c0000
+#define SDIO_BASE		0xfe2d0000
+#define EMMC_BASE		0xfe2e0000
+#define TRNG_BASE		0xfe378000
 #define KEYLADDER_BASE		0xfe380000
 #define CRYPTO_S_BASE		0xfe390000
 #define OTP_S_BASE		0xfe3a0000
@@ -116,6 +120,8 @@
 #define NSTIMER0_BASE		0xfeae0000
 #define NSTIMER1_BASE		0xfeae8000
 #define WDT_NS_BASE		0xfeaf0000
+
+#define SPI2_BASE		0xfeb20000
 
 #define UART1_BASE		0xfeb40000
 #define UART2_BASE		0xfeb50000
@@ -132,6 +138,7 @@
 #define GPIO3_BASE		0xfec40000
 #define GPIO4_BASE		0xfec50000
 
+#define MAILBOX0_BASE		0xfec60000
 #define MAILBOX1_BASE		0xfec70000
 #define OTP_NS_BASE		0xfecc0000
 #define INTMUX0_DDR_BASE	0Xfecf8000
@@ -190,7 +197,7 @@
 #define PLAT_GICITS1_BASE		0xfe660000
 
 /******************************************************************************
- * sgi, ppi
+ * sgi, ppi, spi
  ******************************************************************************/
 #define RK_IRQ_SEC_SGI_0		8
 #define RK_IRQ_SEC_SGI_1		9
@@ -201,6 +208,7 @@
 #define RK_IRQ_SEC_SGI_6		14
 #define RK_IRQ_SEC_SGI_7		15
 #define RK_IRQ_SEC_PHY_TIMER		29
+#define RK_IRQ_MAILBOX0_AP0		93
 
 /*
  * Define a list of Group 1 Secure and Group 0 interrupts as per GICv3
@@ -214,6 +222,8 @@
 
 #define PLAT_RK_GICV3_G0_IRQS						\
 	INTR_PROP_DESC(RK_IRQ_SEC_SGI_6, GIC_HIGHEST_SEC_PRIORITY,	\
+		       INTR_GROUP0, GIC_INTR_CFG_LEVEL),		\
+	INTR_PROP_DESC(RK_IRQ_MAILBOX0_AP0, GIC_HIGHEST_SEC_PRIORITY,	\
 		       INTR_GROUP0, GIC_INTR_CFG_LEVEL)
 
 /******************************************************************************
